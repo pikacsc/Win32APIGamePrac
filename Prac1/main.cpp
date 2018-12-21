@@ -1,5 +1,28 @@
 #include <Windows.h> //To use WinMain() and other win32API 
 
+//basic form of function WndProc()
+LRESULT CALLBACK MyWndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
+{
+	switch (iMessage) {
+	case WM_LBUTTONDOWN://mouse left button pressed
+		MessageBoxA(0, "Boom!", "You just clicked left Button!", MB_OK);
+		return 0;
+	/*
+	case Every action can be messages, minimumize window, maximumize window, mouse click, hover etc:
+		//effect
+		return 0;
+	*/
+
+	case WM_DESTROY: //when press X button(destroy screen)
+		MessageBoxA(0, "Good Bye!", "You just clicked X Button!", MB_OK);
+		PostQuitMessage(0); //destroy process
+		return 0;
+	}
+	return(DefWindowProc(hWnd, iMessage, wParam, lParam)); //DefWindowProc() : dealing basic messages
+}
+
+
+
 int CALLBACK WinMain(_In_ HINSTANCE hInstance,_In_ HINSTANCE hPrevInstance,_In_ LPSTR lpCmdLine,_In_ int nCmdShow)
 {
 //int MessageBoxA(HWND hWnd, LPCSTR lpText, LPCSTR lpCaption, UINT uType);
@@ -7,7 +30,7 @@ int CALLBACK WinMain(_In_ HINSTANCE hInstance,_In_ HINSTANCE hPrevInstance,_In_ 
 
 /*
 	HWND CreateWindowA(
-		LPCTSTR lpClassName, //built in window class name, "edit", "button", etc ...
+		LPCTSTR lpClassName, //built in window class name, "edit", "button", etc ... or custom RegisterClass name
 		LPCTSTR lpWindowName, //window screen title name
 		DWORD dwStyle, //window screen style
 		int x,   //location of window screen based on horizontal x value
@@ -19,8 +42,56 @@ int CALLBACK WinMain(_In_ HINSTANCE hInstance,_In_ HINSTANCE hPrevInstance,_In_ 
 		HINSTANCE hInstance, //instance handle which is dealing with window screen
 		LPVOID lpParam);
 */
-	CreateWindowA("button","firtWindow",WS_POPUP|WS_VISIBLE,5,5,100,100,NULL,NULL,hInstance,NULL);
-	MessageBoxA(NULL, "test", "Now you see me", MB_OK);
+
+	/*
+	ATOM RegisterClassA(
+		const WNDCLASSA *lpWndClass
+	);
+	*/
+	WNDCLASSA WndClass = { 0 };
+	WndClass.lpszClassName = "MyWindow"; //Register Class Name , we can use it with CreateWindowA()
+	WndClass.hInstance = hInstance;
+	WndClass.lpfnWndProc = MyWndProc; //function which is dealing window message queue
+	WndClass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH); //set background color
+	
+	/*
+	typedef struct tagWNDCLASSA {
+	UINT      style;
+	WNDPROC   lpfnWndProc;
+	int       cbClsExtra;
+	int       cbWndExtra;
+	HINSTANCE hInstance;
+	HICON     hIcon;
+	HCURSOR   hCursor;
+	HBRUSH    hbrBackground;
+	LPCSTR    lpszMenuName;
+	LPCSTR    lpszClassName;
+	} WNDCLASSA, *PWNDCLASSA, *NPWNDCLASSA, *LPWNDCLASSA;
+	*/
+
+
+	RegisterClassA(&WndClass);
+	CreateWindowA("MyWindow","firtWindow",WS_OVERLAPPEDWINDOW|WS_VISIBLE,5,5,500,500,NULL,NULL,hInstance,NULL);
+	
+
+	/*
+	BOOL GetMessage(
+		LPMSG lpMsg,
+		HWND  hWnd,
+		UINT  wMsgFilterMin,
+		UINT  wMsgFilterMax
+	);
+	
+	*/
+
+	MSG msg;
+
+	while (GetMessageA(&msg, 0, NULL, NULL)) //GetMessageA() : get message from MessageQueue
+	{
+		DispatchMessageA(&msg); //dispatch message to WndProc()
+	}
+	
+	//MessageBoxA(NULL, "test", "Now you see me", MB_OK);
 
 	return 0;
 }
