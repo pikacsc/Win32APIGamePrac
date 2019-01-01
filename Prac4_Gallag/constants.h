@@ -12,4 +12,11 @@ namespace constants
 	extern const long PlayerStartPoint_BOTTOM(650);
 
 	extern const int iPlayerDefaultSpeed(500);
+
+	extern const float fPlayerBulletDefaultSpeed(500.f);
 }
+
+enum MOVE_DIRECTION
+{
+
+};

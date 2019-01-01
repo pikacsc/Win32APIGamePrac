@@ -11,3 +11,5 @@ typedef struct _tagSphere
 	float x, y;
 	float r;
 } fSPHERE, *PSPHERE;
+
+
