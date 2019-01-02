@@ -1,7 +1,10 @@
 #pragma once
 #include <Windows.h>
 #include <list>
+#include <array>
+#include <random>
 #include "constants.h"
+#include "enemy.h"
 namespace Game
 {
 	using namespace constants;
@@ -21,7 +24,6 @@ namespace Game
 		float		fRange;
 		float		fLimitRange;
 	} RECTBULLET, *PRECTBULLET;
-
 
 	typedef struct _tagEnemy1
 	{
@@ -46,14 +48,21 @@ namespace Game
 	list<RECTBULLET>	g_EnemyRectBulletList;
 	list<SPHEREBULLET>  g_EnemySphereBulletList;
 
+	SPENEMY				g_spEnemy = {};
+
+	array<SphereEnemy,MAX_ENEMY_COUNT> g_EnemyArray;
 
 	//Delta time
 	LARGE_INTEGER	g_tSecond;
 	LARGE_INTEGER	g_tTime;
 	float			g_fDeltaTime;
 	float			g_fTimeScale = 1.f;
+	float			g_fEnemyRespawnTime = 0.f;
 
 
+	inline void DrawingSPHERE(const float& _x, const float& _y, const float& _r) {
+		Ellipse(g_hDC,static_cast<int>(_x - _r),static_cast<int>(_y - _r),static_cast<int>(_x + _r),static_cast<int>(_y + _r));
+	}
 	inline void DrawingSPHERE(fSPHERE _SPHERE){
 		Ellipse(g_hDC,
 			static_cast<int>(_SPHERE.x - _SPHERE.r),
@@ -61,7 +70,6 @@ namespace Game
 			static_cast<int>(_SPHERE.x + _SPHERE.r),
 			static_cast<int>(_SPHERE.y + _SPHERE.r));
 	}
-
 	inline void DrawingRECT(fRECTANGLE _fRECT) {
 		Rectangle(g_hDC,static_cast<int>(_fRECT.left),static_cast<int>(_fRECT.top),static_cast<int>(_fRECT.right),static_cast<int>(_fRECT.bottom));
 	}
@@ -88,15 +96,17 @@ namespace Game
 	inline bool IsBulletOutOfClient(const RECTBULLET& rBullet) { return (rBullet.rc.top <= g_ClientRECT.top); }
 	//inline bool IsBulletOutOfClient(const SPHEREBULLET& sBullet) { return (sBullet.r <= g_ClientRECT.top); }
 
-		void KeyBoardInteract();
-		void InitDeltaTime();
-		SPHEREBULLET InstanciateSphereBullet();
-		RECTBULLET InstanciateRectBullet(const unsigned short& _sLimitDist);
-		void DrawingPlayerRectBullet();
-		void DrawingEnemyRectBullet();
-		void DrawingPlayerSphereBullet();
-		void DrawingEnemySphereBullet();
-
+		void			KeyBoardInteract();
+		void			InitDeltaTime();
+		SPHEREBULLET	InstanciateSphereBullet();
+		RECTBULLET		InstanciateRectBullet(const unsigned short& _sLimitDist);
+		void			DrawingPlayerRectBullet();
+		void			DrawingEnemyRectBullet();
+		void			DrawingPlayerSphereBullet();
+		void			DrawingEnemySphereBullet();
+		void			InstanciateEnemy();
+		void			DrawingEnemy();
+		size_t			GetRandomNumber(const size_t& a, const size_t& b);
 
 		// Initialize Game variables, Game Objects
 		void Init()
@@ -115,7 +125,11 @@ namespace Game
 
 			//Player start point
 			g_tPlayerSquare = { PlayerStartPoint_LEFT, PlayerStartPoint_TOP ,PlayerStartPoint_RIGHT, PlayerStartPoint_BOTTOM };
-		
+			/*
+			g_spEnemy.tSphere.r = SphereEnemySize_Middle;
+			g_spEnemy.tSphere.x = ClientPosX_CENTER;
+			g_spEnemy.tSphere.y = -50.f;
+			*/	
 
 		}
 
@@ -123,13 +137,25 @@ namespace Game
 		{
 			InitDeltaTime();
 			UpdatePlayerSpeed();
+
+			//Enemy Respawn by 2seconds
+			g_fEnemyRespawnTime += g_fDeltaTime * g_fTimeScale;
+			if (g_fEnemyRespawnTime >= SphereEnemyRespawnMaxTime)
+			{
+				InstanciateEnemy();
+				g_fEnemyRespawnTime -= SphereEnemyRespawnMaxTime;
+			}
+
 			KeyBoardInteract();
 		}
 	
 		void Render()
 		{
-			DrawingRECT(g_ClientRECT);
+			//DrawingRECT(g_ClientRECT);
 			DrawingRECT(g_tPlayerSquare);
+			DrawingPlayerRectBullet();
+			DrawingEnemy();
+			//DrawingSPHERE(g_spEnemy.tSphere);
 		}
 
 		void Release()
@@ -173,7 +199,6 @@ namespace Game
 			if (GetAsyncKeyState(VK_SPACE) & 0x8000) {
 				RECTBULLET rBullet = InstanciateRectBullet(7);
 				g_PlayerRectBulletList.push_back(rBullet);
-				DrawingPlayerRectBullet();
 			}
 
 		}
@@ -191,7 +216,7 @@ namespace Game
 		{
 
 		}
-*/
+		*/
 		RECTBULLET InstanciateRectBullet(const unsigned short& _sLimitDist)
 		{
 			RECTBULLET tBullet;
@@ -244,7 +269,43 @@ namespace Game
 		}
 		void DrawingEnemySphereBullet()
 		{
+			
+		}
 
+
+		void InstanciateEnemy()
+		{
+			SphereEnemy sphereEnemy;
+			sphereEnemy.SetX(static_cast<float>(GetRandomNumber(SphereEnemyRespawnPos_minX, SphereEnemyRespawnPos_maxX)));
+			sphereEnemy.SetY(SphereEnemyRespawnPos_Y);
+			sphereEnemy.SetR(SphereEnemySize_Middle);
+			sphereEnemy.SetFLimitTime(2.f);
+			g_EnemyArray.fill(sphereEnemy);
+		}
+
+
+		void DrawingEnemy()
+		{
+			array<SphereEnemy, MAX_ENEMY_COUNT>::iterator iter;
+			array<SphereEnemy, MAX_ENEMY_COUNT>::iterator iterEnd = g_EnemyArray.end();
+
+			float fSpeed = fPlayerBulletDefaultSpeed * g_fDeltaTime * g_fTimeScale;
+
+			for (iter = g_EnemyArray.begin(); iter != iterEnd; ++iter)
+			{
+				(*iter).MoveY(50.f, 5.f);
+			}
+			for (iter = g_EnemyArray.begin(); iter != iterEnd; ++iter)
+				DrawingSPHERE((*iter).GetX(), (*iter).GetY(), (*iter).GetR());
+		}
+
+		size_t GetRandomNumber(const size_t& a, const size_t& b)
+		{
+			//<random>, recommended way
+			random_device rd;
+			mt19937 mersenne(rd()); //mt19937 : 32bit random nubmer
+			uniform_int_distribution<> dice(a, b); //equal chance value, random number between 1 and 6 
+			return dice(mersenne);
 		}
 
 }
