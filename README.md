@@ -13,13 +13,13 @@ This project is about how to create window screen, call 'MessageBox', analyze es
 ***
 ## Prac2
 This project is about how to draw shapes by using Windows API.
-![enter image description here](https://user-images.githubusercontent.com/30831021/50429820-ccfa0500-0903-11e9-89b6-1adba4f99dbf.JPG)
-![enter image description here](https://user-images.githubusercontent.com/30831021/50429768-958b5880-0903-11e9-9aaf-7f3d50527e95.JPG)
+![enter image description here](https://user-images.githubusercontent.com/30831021/50721125-6f349c80-10fd-11e9-9952-f1a37730cee6.gif)
 ***
 ## Prac3
 In this project is about basic concepts of Windows API game: client, key input, run, redering, 
 2D object collider, rotation, etc things to make simple bullet shooting game.
-![enter image description here](https://user-images.githubusercontent.com/30831021/50516223-f32ec900-0aec-11e9-855b-605dc2fdce62.JPG)
+
+![enter image description here](https://user-images.githubusercontent.com/30831021/50721138-9b501d80-10fd-11e9-9b50-ad633fb72604.gif)
 ***
 ## Prac4 _Gallag
 Mini Game project based on Prac3 studying
