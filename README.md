@@ -19,7 +19,7 @@ This project is about how to draw shapes by using Windows API.
 In this project is about basic concepts of Windows API game: client, key input, run, redering, 
 2D object collider, rotation, etc things to make simple bullet shooting game.
 
-![enter image description here](https://user-images.githubusercontent.com/30831021/50721138-9b501d80-10fd-11e9-9b50-ad633fb72604.gif)
+![enter image description here](https://user-images.githubusercontent.com/30831021/50731569-b11c1c00-11ab-11e9-8178-e5b018a754b9.gif)
 ***
 ## Prac4 _Gallag
 Mini Game project based on Prac3 studying
