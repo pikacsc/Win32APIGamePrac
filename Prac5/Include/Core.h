@@ -32,6 +32,7 @@ private:
 private:
 	HINSTANCE		m_hInst;
 	HWND			m_hWnd;
+	HDC				m_hDC;
 	RESOLUTION		m_tRS;
 
 public:
@@ -41,5 +42,12 @@ public:
 
 	static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
+private:
+	void Logic();
+	void Input(const float& fDeltaTime);
+	int Update(const float& fDeltaTime);
+	int LateUpdate(const float& fDeltaTime);
+	void Collision(const float& fDeltaTime);
+	void Render(const float& fDeltaTime);
 };
 

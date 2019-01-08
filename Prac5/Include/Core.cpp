@@ -1,4 +1,6 @@
 #include "Core.h"
+#include "Scene/SceneManager.h"
+#include "Core/Timer.h"
 
 Core* Core::m_pInstance = NULL;
 bool  Core::m_bLoop = true;
@@ -9,6 +11,8 @@ Core::Core()
 
 Core::~Core()
 {
+	DESTROY_SINGLE(SceneManager);
+	DESTROY_SINGLE(Timer);
 }
 
 ATOM Core::MyRegisterClass()
@@ -65,6 +69,17 @@ bool Core::Init(HINSTANCE hInst)
 	m_tRS.iH = 720;
 
 	Create();
+	
+	//initialize DC
+	m_hDC = GetDC(m_hWnd);
+
+	//initialize Timer
+	if (!GET_SINGLE(Timer)->Init())
+		return false;
+
+	//initialize SceneManager
+	if (!GET_SINGLE(SceneManager)->Init())
+		return false;
 
 	return true;
 }
@@ -84,6 +99,7 @@ int Core::Run()
 		}
 		else
 		{
+			Logic();
 		}
 	}
 	return (int)msg.wParam;
@@ -109,6 +125,47 @@ LRESULT Core::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		return DefWindowProc(hWnd, message, wParam, lParam);
 	}
 	return 0;
+}
+
+void Core::Logic()
+{
+	//renewaling timer
+	GET_SINGLE(Timer)->Update();
+
+	float fDeltaTime = GET_SINGLE(Timer)->GetDeltaTime();//initialize common delta Time
+
+	Input(fDeltaTime);
+	Update(fDeltaTime);
+	LateUpdate(fDeltaTime);
+	Collision(fDeltaTime);
+	Render(fDeltaTime);
+}
+
+void Core::Input(const float & fDeltaTime)
+{
+	GET_SINGLE(SceneManager)->Input(fDeltaTime);
+}
+
+int Core::Update(const float & fDeltaTime)
+{
+	GET_SINGLE(SceneManager)->Update(fDeltaTime);
+	return 0;
+}
+
+int Core::LateUpdate(const float & fDeltaTime)
+{
+	GET_SINGLE(SceneManager)->LateUpdate(fDeltaTime);
+	return 0;
+}
+
+void Core::Collision(const float & fDeltaTime)
+{
+	GET_SINGLE(SceneManager)->Collision(fDeltaTime);
+}
+
+void Core::Render(const float & fDeltaTime)
+{
+	GET_SINGLE(SceneManager)->Render(m_hDC, fDeltaTime);
 }
 
 
