@@ -25,6 +25,18 @@
     <Filter Include="Object">
       <UniqueIdentifier>{e63b668a-eb20-4bc9-a72c-61e30eaa18fe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\MoveObj">
+      <UniqueIdentifier>{4464623e-e1b2-4981-b1d7-1881bd24d95a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\StaticObj">
+      <UniqueIdentifier>{abd2380e-ab1a-4a0e-b5d0-397f1cd6f7d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\MoveObj\Player">
+      <UniqueIdentifier>{3fd12e4e-dc84-4a17-bc31-67b5c9c08eae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Layer">
+      <UniqueIdentifier>{54cd1b50-7e49-4202-bedf-1c34c136c7cd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -34,9 +46,6 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Scene\Scene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\Layer.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="Core\Timer.cpp">
@@ -50,6 +59,21 @@
     </ClCompile>
     <ClCompile Include="Scene\SceneManager.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Ref.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\MoveObj.cpp">
+      <Filter>Object\MoveObj</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Player.cpp">
+      <Filter>Object\MoveObj\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\StaticObj.cpp">
+      <Filter>Object\StaticObj</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Layer.cpp">
+      <Filter>Scene\Layer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -77,9 +101,6 @@
     <ClInclude Include="Scene\Scene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\Layer.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Core\Timer.h">
       <Filter>Core\Timer</Filter>
     </ClInclude>
@@ -88,6 +109,21 @@
     </ClInclude>
     <ClInclude Include="Object\Obj.h">
       <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Ref.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\MoveObj.h">
+      <Filter>Object\MoveObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Player.h">
+      <Filter>Object\MoveObj\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\StaticObj.h">
+      <Filter>Object\StaticObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Layer.h">
+      <Filter>Scene\Layer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

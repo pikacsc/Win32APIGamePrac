@@ -14,27 +14,27 @@ using namespace std;
 
 
 template <typename T>
-void Safe_Delete_VecList(T& p)
+void Safe_Delete_VecList(T& _p)
 {
 	T::template iterator iter;
-	T::template iterator iterEnd = p.end();
+	T::template iterator iterEnd = _p.end();
 
-	for (iter = p.begin(); iter != iterEnd; ++iter)
+	for (iter = _p.begin(); iter != iterEnd; ++iter)
 	{
 		SAFE_DELETE((*iter));
 	}
-	p.clear();
+	_p.clear();
 }
 
 template <typename T>
-void Safe_Release_VecList(T& p)
+void Safe_Release_VecList(T& _p)
 {
 	T::template iterator iter;
-	T::template iterator iterEnd = p.end();
+	T::template iterator iterEnd = _p.end();
 
-	for (iter = p.begin(); iter != iterEnd; ++iter)
+	for (iter = _p.begin(); iter != iterEnd; ++iter)
 	{
 		SAFE_RELEASE((*iter));
 	}
-	p.clear();
+	_p.clear();
 }

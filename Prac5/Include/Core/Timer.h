@@ -28,9 +28,9 @@ public:
 		return m_fTimeScale;
 	}
 
-	void SetTimeScale(const float& fTimeScale)
+	void SetTimeScale(const float& _fTimeScale)
 	{
-		m_fTimeScale = fTimeScale;
+		m_fTimeScale = _fTimeScale;
 	}
 
 public:

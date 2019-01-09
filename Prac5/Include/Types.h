@@ -12,6 +12,16 @@ class Position
 private:
 	float m_fX;
 	float m_fY;
+public:
+	float GetX()
+	{
+		return m_fX;
+	}
+
+	float GetY()
+	{
+		return m_fY;
+	}
 
 public:
 	Position()
@@ -72,19 +82,19 @@ public:
 		return tPos;
 	}
 
-	Position operator + (float f[2])
+	Position operator + (float _f[2])
 	{
 		Position	tPos;
-		tPos.m_fX += f[0];
-		tPos.m_fY += f[1];
+		tPos.m_fX += _f[0];
+		tPos.m_fY += _f[1];
 		return tPos;
 	}
 
-	Position operator + (const float& f)
+	Position operator + (const float& _f)
 	{
 		Position	tPos;
-		tPos.m_fX += f;
-		tPos.m_fY += f;
+		tPos.m_fX += _f;
+		tPos.m_fY += _f;
 		return tPos;
 	}
 
@@ -106,19 +116,19 @@ public:
 		return tPos;
 	}
 
-	Position operator - (float f[2])
+	Position operator - (float _f[2])
 	{
 		Position	tPos;
-		tPos.m_fX -= f[0];
-		tPos.m_fY -= f[1];
+		tPos.m_fX -= _f[0];
+		tPos.m_fY -= _f[1];
 		return tPos;
 	}
 
-	Position operator - (const float& f)
+	Position operator - (const float& _f)
 	{
 		Position	tPos;
-		tPos.m_fX -= f;
-		tPos.m_fY -= f;
+		tPos.m_fX -= _f;
+		tPos.m_fY -= _f;
 		return tPos;
 	}
 
@@ -139,19 +149,19 @@ public:
 		return tPos;
 	}
 
-	Position operator * (float f[2])
+	Position operator * (float _f[2])
 	{
 		Position	tPos;
-		tPos.m_fX *= f[0];
-		tPos.m_fY *= f[1];
+		tPos.m_fX *= _f[0];
+		tPos.m_fY *= _f[1];
 		return tPos;
 	}
 
-	Position operator * (const float& f)
+	Position operator * (const float& _f)
 	{
 		Position	tPos;
-		tPos.m_fX *= f;
-		tPos.m_fY *= f;
+		tPos.m_fX *= _f;
+		tPos.m_fY *= _f;
 		return tPos;
 	}
 
@@ -173,19 +183,19 @@ public:
 		return tPos;
 	}
 
-	Position operator / (float f[2])
+	Position operator / (float _f[2])
 	{
 		Position	tPos;
-		tPos.m_fX /= f[0];
-		tPos.m_fY /= f[1];
+		tPos.m_fX /= _f[0];
+		tPos.m_fY /= _f[1];
 		return tPos;
 	}
 
-	Position operator / (const float& f)
+	Position operator / (const float& _f)
 	{
 		Position	tPos;
-		tPos.m_fX /= f;
-		tPos.m_fY /= f;
+		tPos.m_fX /= _f;
+		tPos.m_fY /= _f;
 		return tPos;
 	}
 
