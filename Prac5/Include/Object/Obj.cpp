@@ -1,10 +1,12 @@
 #include "Obj.h"
 
-
-
 Obj::Obj()
-	:m_iRef(1)
 {
+}
+
+Obj::Obj(const Obj & _obj)
+{
+	*this = _obj;
 }
 
 
@@ -12,29 +14,25 @@ Obj::~Obj()
 {
 }
 
-bool Obj::Init()
-{
-	return true;
-}
 
-void Obj::Input(const float& fDeltaTime)
+void Obj::Input(const float& _fDeltaTime)
 {
 }
 
-int Obj::Update(const float& fDeltaTime)
+int Obj::Update(const float& _fDeltaTime)
 {
 	return 0;
 }
 
-int Obj::LateUpdate(const float& fDeltaTime)
+int Obj::LateUpdate(const float& _fDeltaTime)
 {
 	return 0;
 }
 
-void Obj::Collision(const float& fDeltaTime)
+void Obj::Collision(const float& _fDeltaTime)
 {
 }
 
-void Obj::Render(HDC hDC, const float& fDeltaTime)
+void Obj::Render(HDC _hDC, const float& _fDeltaTime)
 {
 }

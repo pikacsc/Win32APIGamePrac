@@ -1,40 +1,49 @@
 #pragma once
-#include "../Game.h"
+#include "../Scene/Layer.h"
+#include "../Ref.h"
 
-class Obj
+class Obj : public Ref
 {
 protected:
 	Obj();
+	Obj(const Obj& _obj);
 	virtual ~Obj();
 
 protected:
-	int		m_iRef;
+	class Scene* m_pScene;
+	class Layer* m_pLayer;
+
 public:
-	void AddRef()
+	void SetScene(class Scene* _pScene)
 	{
-		++m_iRef;
+		m_pScene = _pScene;
 	}
 
-	int Release()
+	void SetLayer(class Layer* _pLayer)
 	{
-		--m_iRef;
-		if (m_iRef == 0)
-		{
-			delete this;
-			return 0;
-		}
-		return m_iRef;
+		m_pLayer = _pLayer;
+	}
+
+	class Scene* GetScene() const
+	{
+		return m_pScene;
+	}
+
+	class Layer* GetLayer() const
+	{
+		return m_pLayer;
 	}
 
 protected:
-	string	 m_strTag;
-	POSITION m_tPos;
-	_SIZE	 m_tSize;
+	eOBJ_CREATE	 m_eObjTag;
+	POSITION	 m_tPos;
+	_SIZE		 m_tSize;
+	POSITION	 m_tPivot;
 
 public:
-	string GetTag() const
+	eOBJ_CREATE GetObjTag() const
 	{
-		return m_strTag;
+		return m_eObjTag;
 	}
 
 	POSITION GetPos() const
@@ -48,9 +57,9 @@ public:
 	}
 
 public:
-	void SetTag(const string& strTag)
+	void SetObjTag(eOBJ_CREATE _eObjTag)
 	{
-		m_strTag = strTag;
+		m_eObjTag = _eObjTag;
 	}
 
 	void SetPos(const POSITION& _pos)
@@ -83,11 +92,31 @@ public:
 
 
 public:
-	virtual bool Init();
-	virtual void Input(const float& fDeltaTime);
-	virtual int Update(const float& fDeltaTime);
-	virtual int LateUpdate(const float& fDeltaTime);
-	virtual void Collision(const float& fDeltaTime);
-	virtual void Render(HDC hDC,const float& fDeltaTime);
+	virtual bool Init() = 0;
+	virtual void Input(const float& _fDeltaTime);
+	virtual int Update(const float& _fDeltaTime);
+	virtual int LateUpdate(const float& _fDeltaTime);
+	virtual void Collision(const float& _fDeltaTime);
+	virtual void Render(HDC hDC,const float& _fDeltaTime);
+
+public:
+	template <typename T>
+	static T* CreateObj(eOBJ_CREATE _eObj, class Layer* _pLayer = NULL)
+	{
+		T* pObj = new T;
+
+		if (!pObj->Init())
+		{
+			SAFE_RELEASE(pObj);
+			return NULL;
+		}
+
+		if (_pLayer)
+		{
+			_pLayer->AddObject(pObj);
+		}
+
+		return pObj;
+	}
 
 };
