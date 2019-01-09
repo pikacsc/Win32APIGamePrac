@@ -12,24 +12,24 @@ public:
 
 private:
 	class Scene*		m_pScene;
-	string				m_strTag;
+	eLAYER_CREATE		m_eLayerTag;
 	int					m_iZOrder;
 	list<class Obj*>	m_ObjList;
 
 public:
-	void SetTag(const string& strTag)
+	void SetLayerTag(eLAYER_CREATE _eLay)
 	{
-		m_strTag = strTag;
+		m_eLayerTag = _eLay;
 	}
 
-	string GetTag() const
+	eLAYER_CREATE GetLayerTag() const
 	{
-		return m_strTag;
+		return m_eLayerTag;
 	}
 
-	void SetZOrder(int iZOrder)
+	void SetZOrder(int _iZOrder)
 	{
-		m_iZOrder = iZOrder;
+		m_iZOrder = _iZOrder;
 	}
 
 	int GetZOrder() const
@@ -37,9 +37,9 @@ public:
 		return m_iZOrder;
 	}
 
-	void SetScene(class Scene* pScene)
+	void SetScene(class Scene* _pScene)
 	{
-		m_pScene = pScene;
+		m_pScene = _pScene;
 	}
 
 	Scene* GetScene() const
@@ -48,9 +48,12 @@ public:
 	}
 
 public:
-	void Input(float fDeltaTime);
-	int Update(float fDeltaTime);
-	int LateUpdate(float fDeltaTime);
-	void Collision(float fDeltaTime);
-	void Render(HDC hDC, float fDeltaTime);
+	void AddObject(class Obj* _pObj);
+
+public:
+	void Input(const float& _fDeltaTime);
+	int Update(const float& _fDeltaTime);
+	int LateUpdate(const float& _fDeltaTime);
+	void Collision(const float& _fDeltaTime);
+	void Render(HDC _hDC,const float& _fDeltaTime);
 };

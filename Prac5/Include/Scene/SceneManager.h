@@ -9,15 +9,15 @@ private:
 
 public:
 	bool	Init();
-	void	Input(const float& fDeltaTime);
-	int		Update(const float& fDeltaTime);
-	int		LateUpdate(const float& fDeltaTime);
-	void	Collision(const float& fDeltaTime);
-	void	Render(HDC hDC, const float& fDeltaTime);
+	void	Input(const float& _fDeltaTime);
+	int		Update(const float& _fDeltaTime);
+	int		LateUpdate(const float& _fDeltaTime);
+	void	Collision(const float& _fDeltaTime);
+	void	Render(HDC _hDC, const float& _fDeltaTime);
 
 public:
 	template<typename T>
-	T* CreateScene(eSCENE_CREATE eSC)
+	T* CreateScene(eSCENE_CREATE _eSC)
 	{
 		T* pScene = new T;
 
@@ -27,7 +27,7 @@ public:
 			return NULL;
 		}
 
-		switch (eSC)
+		switch (_eSC)
 		{
 		case eSC_CURRENT:
 			SAFE_DELETE(m_pScene);

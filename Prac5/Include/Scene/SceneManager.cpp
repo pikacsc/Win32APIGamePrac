@@ -22,30 +22,30 @@ bool SceneManager::Init()
 	return true;
 }
 
-void SceneManager::Input(const float& fDeltaTime)
+void SceneManager::Input(const float& _fDeltaTime)
 {
-	m_pScene->Input(fDeltaTime);
+	m_pScene->Input(_fDeltaTime);
 }
 
-int SceneManager::Update(const float& fDeltaTime)
+int SceneManager::Update(const float& _fDeltaTime)
 {
-	m_pScene->Update(fDeltaTime);
+	m_pScene->Update(_fDeltaTime);
 	return 0;
 }
 
-int SceneManager::LateUpdate(const float& fDeltaTime)
+int SceneManager::LateUpdate(const float& _fDeltaTime)
 {
-	m_pScene->LateUpdate(fDeltaTime);
+	m_pScene->LateUpdate(_fDeltaTime);
 	return 0;
 }
 
-void SceneManager::Collision(const float& fDeltaTime)
+void SceneManager::Collision(const float& _fDeltaTime)
 {
-	m_pScene->Collision(fDeltaTime);
+	m_pScene->Collision(_fDeltaTime);
 }
 
-void SceneManager::Render(HDC hDC, const float& fDeltaTime)
+void SceneManager::Render(HDC _hDC, const float& _fDeltaTime)
 {
-	m_pScene->Render(hDC, fDeltaTime);
+	m_pScene->Render(_hDC, _fDeltaTime);
 }
 
