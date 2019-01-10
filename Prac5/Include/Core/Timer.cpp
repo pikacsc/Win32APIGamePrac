@@ -31,4 +31,5 @@ void Timer::Update()
 	LARGE_INTEGER tTime;
 	QueryPerformanceCounter(&tTime);
 	m_fDeltaTime = (tTime.QuadPart - m_tTime.QuadPart) / static_cast<float>(m_tSecond.QuadPart);
+	m_tTime = tTime;
 }
