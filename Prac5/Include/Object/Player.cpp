@@ -15,14 +15,32 @@ Player::~Player()
 
 bool Player::Init()
 {
-	SetPos(100.f, 100.f);
-	SetSize(100.f, 100.f);
+	SetPos(constants::Player_DefaultPosX, constants::Player_DefaultPosY);
+	SetSize(constants::Player_DefaultSizeWidth, constants::Player_DefaultSizeHeight);
+	SetSpeed(constants::Player_DefaultSpeed);
 	return true;
 }
 
 void Player::Input(const float & _fDeltaTime)
 {
 	MoveObj::Input(_fDeltaTime);
+	if (KEY_INPUT(VK_UP))
+	{
+		MoveYFromSpeed(_fDeltaTime, MD_BACK);
+	}
+	if (KEY_INPUT(VK_DOWN))
+	{
+		MoveYFromSpeed(_fDeltaTime, MD_FRONT);
+	}
+	if (KEY_INPUT(VK_LEFT))
+	{
+		MoveXFromSpeed(_fDeltaTime, MD_BACK);
+	}
+	if (KEY_INPUT(VK_RIGHT))
+	{
+		MoveXFromSpeed(_fDeltaTime, MD_FRONT);
+	}
+
 }
 
 int Player::Update(const float & _fDeltaTime)

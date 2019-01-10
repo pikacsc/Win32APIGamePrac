@@ -23,3 +23,7 @@
 #define DEFINITION_SINGLE(Type) Type* Type::m_pInstance = NULL;
 #define GET_SINGLE(Type)		Type::GetInstance()
 #define DESTROY_SINGLE(Type)	Type::DestroyInstance()
+#define GETRESOLUTION Core::GetIntance()->GetResolution()
+
+inline bool KEY_INPUT(const short& _VKInput) { return GetAsyncKeyState(_VKInput) & 0x8000; }
+
