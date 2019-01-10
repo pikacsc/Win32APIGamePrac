@@ -39,7 +39,7 @@ protected:
 	POSITION	 m_tPos;
 	_SIZE		 m_tSize;
 	POSITION	 m_tPivot;
-
+	float		 m_fAngle;
 public:
 	eOBJ_CREATE GetObjTag() const
 	{
