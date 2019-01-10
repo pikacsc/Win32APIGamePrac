@@ -13,14 +13,22 @@ private:
 	float m_fX;
 	float m_fY;
 public:
-	float GetX()
+	float GetX() const
 	{
 		return m_fX;
 	}
 
-	float GetY()
+	float GetY() const
 	{
 		return m_fY;
+	}
+
+	void SetX(const float& _fX) {
+		m_fX = _fX;
+	}
+
+	void SetY(const float& _fY) {
+		m_fY = _fY;
 	}
 
 public:
@@ -66,7 +74,7 @@ public:
 	}
 
 	//operator +
-	Position operator + (const Position& _pos)
+	Position operator + (const Position& _pos) const
 	{
 		Position	tPos;
 		tPos.m_fX += _pos.m_fX;
@@ -74,7 +82,7 @@ public:
 		return tPos;
 	}
 
-	Position operator + (const POINT& _pt)
+	Position operator + (const POINT& _pt) const
 	{
 		Position	tPos;
 		tPos.m_fX += static_cast<float>(_pt.x);
@@ -82,7 +90,7 @@ public:
 		return tPos;
 	}
 
-	Position operator + (float _f[2])
+	Position operator + (float _f[2]) const
 	{
 		Position	tPos;
 		tPos.m_fX += _f[0];
@@ -90,7 +98,7 @@ public:
 		return tPos;
 	}
 
-	Position operator + (const float& _f)
+	Position operator + (const float& _f) const
 	{
 		Position	tPos;
 		tPos.m_fX += _f;
@@ -98,9 +106,15 @@ public:
 		return tPos;
 	}
 
+	void operator += (const Position& _pos)
+	{
+		m_fX += _pos.GetX();
+		m_fY += _pos.GetY();
+	}
+
 
 	//operator -
-	Position operator - (const Position& _pos)
+	Position operator - (const Position& _pos) const
 	{
 		Position	tPos;
 		tPos.m_fX -= _pos.m_fX;
@@ -108,7 +122,7 @@ public:
 		return tPos;
 	}
 
-	Position operator - (const POINT& _pt)
+	Position operator - (const POINT& _pt) const
 	{
 		Position	tPos;
 		tPos.m_fX -= static_cast<float>(_pt.x);
@@ -116,7 +130,7 @@ public:
 		return tPos;
 	}
 
-	Position operator - (float _f[2])
+	Position operator - (float _f[2]) const
 	{
 		Position	tPos;
 		tPos.m_fX -= _f[0];
@@ -124,7 +138,7 @@ public:
 		return tPos;
 	}
 
-	Position operator - (const float& _f)
+	Position operator - (const float& _f) const
 	{
 		Position	tPos;
 		tPos.m_fX -= _f;
@@ -133,7 +147,7 @@ public:
 	}
 
 	//operator *
-	Position operator * (const Position& _pos)
+	Position operator * (const Position& _pos) const
 	{
 		Position	tPos;
 		tPos.m_fX *= _pos.m_fX;
@@ -141,7 +155,7 @@ public:
 		return tPos;
 	}
 
-	Position operator * (const POINT& _pt)
+	Position operator * (const POINT& _pt) const
 	{
 		Position	tPos;
 		tPos.m_fX *= static_cast<float>(_pt.x);
@@ -149,7 +163,7 @@ public:
 		return tPos;
 	}
 
-	Position operator * (float _f[2])
+	Position operator * (float _f[2]) const
 	{
 		Position	tPos;
 		tPos.m_fX *= _f[0];
@@ -157,7 +171,7 @@ public:
 		return tPos;
 	}
 
-	Position operator * (const float& _f)
+	Position operator * (const float& _f) const
 	{
 		Position	tPos;
 		tPos.m_fX *= _f;
@@ -167,7 +181,7 @@ public:
 
 
 	//operator /
-	Position operator / (const Position& _pos)
+	Position operator / (const Position& _pos) const
 	{
 		Position	tPos;
 		tPos.m_fX /= _pos.m_fX;
@@ -175,7 +189,7 @@ public:
 		return tPos;
 	}
 
-	Position operator / (const POINT& _pt)
+	Position operator / (const POINT& _pt) const
 	{
 		Position	tPos;
 		tPos.m_fX /= static_cast<float>(_pt.x);
@@ -183,7 +197,7 @@ public:
 		return tPos;
 	}
 
-	Position operator / (float _f[2])
+	Position operator / (float _f[2]) const
 	{
 		Position	tPos;
 		tPos.m_fX /= _f[0];
@@ -191,7 +205,7 @@ public:
 		return tPos;
 	}
 
-	Position operator / (const float& _f)
+	Position operator / (const float& _f) const
 	{
 		Position	tPos;
 		tPos.m_fX /= _f;
