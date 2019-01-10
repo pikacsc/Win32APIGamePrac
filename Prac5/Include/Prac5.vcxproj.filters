@@ -37,6 +37,9 @@
     <Filter Include="Scene\Layer">
       <UniqueIdentifier>{54cd1b50-7e49-4202-bedf-1c34c136c7cd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\MoveObj\Monster">
+      <UniqueIdentifier>{97d7fecf-fa0d-4c11-94d1-f566afdd313a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -74,6 +77,12 @@
     </ClCompile>
     <ClCompile Include="Scene\Layer.cpp">
       <Filter>Scene\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Monster\M_OrangeMushroom.cpp">
+      <Filter>Object\MoveObj\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="constants.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +133,12 @@
     </ClInclude>
     <ClInclude Include="Scene\Layer.h">
       <Filter>Scene\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="constants.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Monster\M_OrangeMushroom.h">
+      <Filter>Object\MoveObj\Monster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
