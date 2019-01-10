@@ -4,9 +4,11 @@
 #include <list>
 #include <vector>
 #include <unordered_map>
+#include <crtdbg.h>
 
 using namespace std;
 
+#include "constants.h"
 #include "resource.h"
 #include "Macro.h"
 #include "Flag.h"
